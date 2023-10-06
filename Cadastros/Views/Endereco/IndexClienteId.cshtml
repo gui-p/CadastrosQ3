@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EnderecoModel>
+
+@{
+    ViewData["Title"] = "Tabela de Endereços";
+}
+
+
+<div class="text-center">
+
+    <div class="d-sm-inline-flex justify-content-between" style="column-gap: 1vh">
+        <a class="btn btn-success" role="button" asp-controller="Enderecos" asp-action="Criar">
+            Adicionar novo Endereço
+        </a>
+    </div>
+
+    <div>
+        <h2>Endereços</h2>
+    </div>
+
+    <table class="table caption-top">
+        <caption>Lista de Endereços</caption>
+        <thead>
+            <tr>
+                <th scope="col">Id Proprietário</th>
+                <th scope="col">CEP</th>
+                <th scope="col">Logradouro</th>
+                <th scope="col">Bairro</th>
+                <th scope="col">Cidade</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model != null && Model.Any())
+            {
+
+
+                foreach (EnderecoModel modelo in Model)
+                {
+
+                    string situacao = modelo.Ativo ? "Ativo" : "Inativo";
+
+                    long? idProprietario = modelo.FuncionarioId != null ? modelo.FuncionarioId : modelo.ClienteId;
+
+                    <tr class="align-baseline">
+                        <th>@idProprietario</th>
+                        <td>@modelo.CEP</td>
+                        <td>@modelo.Logradouro</td>
+                        <td>@modelo.Bairro</td>
+                        <td>@modelo.Cidade</td>
+                        <td>@situacao</td>
+                        <td>
+                            <div class="btn-group d-flex justify-content-around justify-items-center" role="group">
+                                <a role="button" class="mx-2" asp-controller="Endereco" asp-action="Editar" asp-route-id="@modelo.Id"><i class="fa-solid fa-pen-to-square" style="color: #008031;"></i></a>
+                                <a role="button" class="mx-2" asp-controller="Endereco" asp-action="TrocarAtividade" asp-route-id="@modelo.Id"><i class="fa-solid fa-eye-slash" style="color: #ccb100;"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,82 @@
+﻿@model List<FuncionarioModel>
+
+@{
+    ViewData["Title"] = "Tabela de Funcionários";
+}
+
+
+<div class="text-center">
+
+    <div class="d-sm-inline-flex justify-content-between" style="column-gap: 1vh">
+        <a class="btn btn-success" role="button" asp-controller="Funcionario" asp-action="Criar">
+            Adicionar novo Funcionário
+        </a>
+    </div>
+
+    <div>
+        <h2>Funcionários</h2>      
+    </div>
+
+    <table class="table caption-top">
+        <caption>Lista de Funcionários</caption>
+        <thead>
+            <tr>
+                <th scope="col">Foto</th>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Sobrenome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Endereços</th>
+                <th scope="col">Situação</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model != null && Model.Any())
+            {
+
+                string imgSrc;
+
+                foreach (FuncionarioModel funcionario in Model)
+                {
+
+                    string situacao = funcionario.Ativo ? "Ativo" : "Inativo";
+
+                    if (funcionario.Foto != null)
+                    {
+                        var base64 = Convert.ToBase64String(funcionario.Foto);
+                        imgSrc = $"data:image/gif;base64,{base64}";
+                    }
+                    else
+                    {
+                        imgSrc = "https://cdn-icons-png.flaticon.com/512/5360/5360776.png";
+                    }
+
+
+                    <tr class="align-baseline">
+                        <td scope="col"><img src="@imgSrc" width="50px" height="50px" /></td>
+                        <th>@funcionario.Id</th>
+                        <td>@funcionario.Nome</td>
+                        <td>@funcionario.Sobrenome</td>
+                        <td>@funcionario.CPF</td>
+                        <td>@funcionario.Cargo</td>
+                        <td>(@funcionario.DDD)@funcionario.telefone</td>
+                        <td>
+                            <a role="button" class="mx-2" asp-controller="Endereco" asp-action="IndexFuncionarioId" asp-route-id="@funcionario.Id"><i class="fa-solid fa-house"></i></a>
+                        </td>
+                        <td>@situacao</td>
+                        <td>
+                            <div class="btn-group d-flex justify-content-around justify-items-center" role="group">
+                                <a role="button" class="mx-2" asp-controller="Funcionario" asp-action="Editar" asp-route-id="@funcionario.Id"><i class="fa-solid fa-pen-to-square" style="color: #008031;"></i></a>
+                                <a role="button" class="mx-2" asp-controller="Funcionario" asp-action="TrocarAtividade" asp-route-id="@funcionario.Id"><i class="fa-solid fa-eye-slash" style="color: #ccb100;"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

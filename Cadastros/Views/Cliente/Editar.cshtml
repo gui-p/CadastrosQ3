@@ -1,0 +1,58 @@
+﻿@model ClienteModel
+
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<div>
+    <form asp-controller="Cliente" asp-action="ConfirmarEdicao" enctype="multipart/form-data" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label for="id" class="form-label">ID </label>
+            <input type="number" asp-for="Id" class="form-control" id="id" placeholder="0" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Nome" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="sobre" class="form-label">Sobrenome</label>
+            <input type="text" asp-for="Sobrenome" class="form-control" id="sobre" placeholder="Sobrenome" />
+            <span asp-validation-for="Sobrenome" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="text" asp-for="CPF" class="form-control" id="cpf" placeholder="CPF" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+
+
+        <div>
+            <label for="ddd" class="form-label">DDD</label>
+            <input type="text" asp-for="DDD" class="form-control" id="ddd" placeholder="DDD" />
+            <span asp-validation-for="DDD" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label for="telefone" class="form-label">Número de Contato</label>
+            <input type="text" asp-for="telefone" class="form-control" id="telefone" placeholder="número" />
+            <span asp-validation-for="telefone" class="text-danger"></span>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-label" type="checkbox" id="situacao" asp-for="Ativo" />
+            <label class="form-check-label" for="situacao">Ativo</label>
+        </div>
+        <div>
+            <label for="nomeDaFoto" class="form-label">Imagem do produto: </label>
+            @Html.DisplayFor(model => model.NomeDaFoto)
+            <input type="file" accept="image/png, image/jpeg" class="form-control" id="nomeDaFoto" placeholder="Busque a foto do produto." name="imagemCarregada" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+﻿@model ProdutoModel
+
+@{
+    ViewData["Title"] = "Alterar o produto";
+
+    var dateRecebida = Model.DataDeValidade.Date;
+}
+
+<div>
+    <form asp-controller="Produto" asp-action="Alterar" enctype="multipart/form-data" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+
+        <div>
+            <label for="descricao" class="form-label">Descrição</label>
+            <input type="text" asp-for="Descricao" class="form-control" id="descricao" placeholder="Entre com a descrição do produto" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="codigoDeBarras" class="form-label">Código de Barras</label>
+            <input type="text" asp-for="CodigoDeBarras" class="form-control" id="codigoDeBarras" placeholder="Código de barras" />
+            <span asp-validation-for="CodigoDeBarras" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="dataDeValidade" class="form-label">Data de Validade</label>
+            <input type="date" asp-for="@dateRecebida" class="form-control" id="dataDeValidade" placeholder="@dateRecebida" name="dataAlterada" />
+            <span asp-validation-for="DataDeValidade" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="quantidade" class="form-label">Quantidade</label>
+            <input type="number" asp-for="Quantidade" class="form-control" id="quantidade" placeholder="Entre com a quantidade" />
+            <span asp-validation-for="Quantidade" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="valor" class="form-label">Valor unitário</label>
+            <input type="text" asp-for="Valor" class="form-control" id="valor" placeholder="R$ 0,00" />
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <input class="form-check-label" type="checkbox" id="situacao" asp-for="Ativo" />
+            <label class="form-check-label" for="situacao">Ativo</label>
+        </div>
+        <div>
+            <label for="nomeDaFoto" class="form-label">Imagem do produto: </label>
+            @Html.DisplayFor(model => model.NomeDaFoto);
+            <input type="file" accept="image/png, image/jpeg" class="form-control" id="nomeDaFoto" placeholder="Busque a foto do produto." name="imagemCarregada" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
+        </div>
+    </form>
+</div>
