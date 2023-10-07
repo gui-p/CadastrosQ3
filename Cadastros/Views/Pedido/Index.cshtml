@@ -1,0 +1,75 @@
+﻿@model List<PedidoModel>
+
+@{
+    ViewData["Title"] = "Pedidos";
+
+    var imgSrc = "https://cdn-icons-png.flaticon.com/512/5360/5360776.png";
+}
+
+<div class="text-center">
+    <div>
+        <a class="btn btn-success" role="button" asp-controller="Pedido" asp-action="Criar">
+            Adicionar novo produto
+        </a>
+        <h2>Listar Pedidos</h2>
+    </div>
+
+    <table class="table caption-top">
+        <caption>Lista de Pedido</caption>
+        <thead>
+            <tr>
+                
+                <th scope="col">Id</th>
+                <th scope="col">Id Cliente</th>
+                <th scope="col">Id Funcionario</th>
+                <th scope="col">Data de Pedido</th>
+                <th scope="col">Valor Total</th>
+                <th scope="col">Itens</th>
+                <th scope="col">Status</th>
+                <th scope="col">Situação</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if(Model != null && Model.Any())
+            {
+                foreach(PedidoModel modelo in Model)
+                {
+                    
+                    string estado = "Inativo";
+
+                    if (modelo.Ativo)
+                    {
+                        estado = "Ativo";
+                    }
+
+                    <tr class="align-baseline">
+
+
+
+
+                        <th>@modelo.Id</th>
+                        <td>@modelo.ClienteId</td>
+                        <td>@modelo.FuncionarioId</td>
+                        <td>@modelo.DataPedido.ToString("dd/MM/yyyy")</td>
+                        <td>@modelo.ValorTotal.ToString("C2")</td>
+                        <td>
+                            <div class="btn-group d-flex justify-content-around justify-items-center" role="group">
+                                <a role="button" class="mx-2" asp-controller="ItemPedido" asp-action="IndexId" asp-route-id="@modelo.Id"><i class="fa-solid fa-pen-to-square" style="color: #008031;"></i></a>
+                            </div>
+                        </td>
+                        <td>@estado</td>
+                        <td>@modelo.Status</td>
+                        <td>
+                            <div class="btn-group d-flex justify-content-around justify-items-center" role="group">
+                                <a role="button" class="mx-2" asp-controller="Pedido" asp-action="Editar" asp-route-id="@modelo.Id"><i class="fa-solid fa-pen-to-square" style="color: #008031;"></i></a>
+                                <a role="button" class="mx-2" asp-controller="Pedido" asp-action="TrocarAtividade" asp-route-id="@modelo.Id"><i class="fa-solid fa-eye-slash" style="color: #ccb100;"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

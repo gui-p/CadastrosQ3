@@ -1,0 +1,35 @@
+﻿@model PedidoModel
+
+@{
+    ViewData["Title"] = "Cadastro de Pedidos";
+}
+
+<div>
+    <form asp-controller="Pedido" asp-action="Criar" enctype="multipart/form-data" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label for="idCliente" class="form-label">Id do Cliente</label>
+            <input type="text" asp-for="ClienteId" class="form-control" id="idCliente" placeholder="Id do Funcionario Cliente" />
+            <span asp-validation-for="ClienteId" class="text-danger"></span>
+        </div>
+        <div>
+            <label for="ClienteId" class="form-label">Id do Funcionario</label>
+            <input type="text" asp-for="FuncionarioId" class="form-control" id="ClienteId" placeholder="Id do Funcionario" />
+            <span asp-validation-for="FuncionarioId" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label for="status" class="form-label">Status</label>
+            <input type="text" asp-for="Status" class="form-control" id="status" placeholder="Status" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-label" type="checkbox" id="situacao" asp-for="Ativo" />
+            <label class="form-check-label" for="situacao">Ativo</label>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
+        </div>
+    </form>
+</div>
