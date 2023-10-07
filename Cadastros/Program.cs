@@ -15,6 +15,7 @@ builder.Services.AddScoped<IGenericRepositorio<DependenteModel>, GenericReposito
 builder.Services.AddScoped<IGenericRepositorio<PedidoModel>, GenericRepositorio<PedidoModel>>();
 builder.Services.AddScoped<IGenericRepositorio<ItemPedidoModel>, GenericRepositorio<ItemPedidoModel>>();
 builder.Services.AddScoped<IGenericRepositorio<EnderecoModel>, GenericRepositorio<EnderecoModel>>();
+builder.Services.AddScoped<ILoginRepositorio, LoginRepositorio>();
 
 
 builder.Services.AddRazorPages()

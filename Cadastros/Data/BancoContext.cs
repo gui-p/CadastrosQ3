@@ -24,6 +24,7 @@ namespace Cadastros.Data
         public DbSet<PedidoModel> Pedido { get; set; }
 
         public DbSet<ItemPedidoModel> ItemPedido { get; set; }
+        public DbSet<LoginModel> Login { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
