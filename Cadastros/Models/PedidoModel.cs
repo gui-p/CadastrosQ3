@@ -13,7 +13,6 @@ namespace Cadastros.Models
         [DataType(DataType.DateTime)]
         public DateTime DataPedido { get; set; }
 
-        [Range(typeof(decimal), "0", "decimal.MaxValue", ErrorMessage = "Apenas valores positivos")]
         [Required(ErrorMessage = "Campo obrigatório")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,2)")]
@@ -24,13 +23,13 @@ namespace Cadastros.Models
 
         public long ClienteId { get; set; }
 
-        public ClienteModel Cliente { get; set; }
+        public ClienteModel? Cliente { get; set; }
 
         public long FuncionarioId { get; set; }
 
-        public FuncionarioModel Funcionario { get; set; }
+        public FuncionarioModel? Funcionario { get; set; }
 
-        public ICollection<ItemPedidoModel> ItemPedidos { get; set; } = new List<ItemPedidoModel>();
+        public ICollection<ItemPedidoModel>? ItemPedidos { get; set; } = new List<ItemPedidoModel>();
 
 
 

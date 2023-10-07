@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ItemPedidoModel>
+
+@{
+    ViewData["Title"] = "Items";
+}
+
+<div class="text-center">
+    <div>
+        <a class="btn btn-success" role="button" asp-controller="ItemPedido" asp-action="Criar">
+            Adicionar novo produto
+        </a>
+        <h2>Listar Items</h2>
+    </div>
+
+    <table class="table caption-top">
+        <caption>Lista de Items</caption>
+        <thead>
+            <tr>
+                
+                <th scope="col">Id</th>
+                <th scope="col">Id Pedido</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if(Model != null && Model.Any())
+            {
+                foreach(ItemPedidoModel modelo in Model)
+                {
+                    
+                    string estado = "Inativo";
+
+                    if (modelo.Ativo)
+                    {
+                        estado = "Ativo";
+                    }
+
+                    <tr class="align-baseline">
+
+                        <th>@modelo.Id</th>
+                        <td>@modelo.PedidoId</td>
+                        <td>@modelo.Quantidade</td>
+                        <td>@modelo.Valor.ToString("C2")</td>
+                        <td>@modelo.ProdutoId<td>
+                        <td>@estado</td>
+                        <td>
+                            <div class="btn-group d-flex justify-content-around justify-items-center" role="group">
+                                <a role="button" class="mx-2" asp-controller="Pedido" asp-action="Editar" asp-route-id="@modelo.Id"><i class="fa-solid fa-pen-to-square" style="color: #008031;"></i></a>
+                                <a role="button" class="mx-2" asp-controller="Pedido" asp-action="TrocarAtividade" asp-route-id="@modelo.Id"><i class="fa-solid fa-eye-slash" style="color: #ccb100;"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
